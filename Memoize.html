@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Memoize</title>
+    <script>
+        function factorial(n){
+            if(n <1) return 1;
+            return n*factorial(n-1)
+
+        }
+        console.log(factorial(5))
+        console.log(factorial(10))
+        function memoize(fn){
+            var cache ={
+            }
+
+            return function(){
+                var args = Array.prototype.slice.call(arguments, fn.arguments)
+                var hash='';
+                args.forEach(function(x){
+                    hash+= x.toString()
+                })
+
+                if(typeof cache[hash] === 'undefined'){
+                    console.log('not in cache')
+                    cache[hash]=fn.apply(this, args)
+
+                }
+
+                return cache[hash]
+
+            }
+
+
+        }
+
+
+        var fact_mem = memoize(factorial)
+        console.log(fact_mem(5))
+        console.log(fact_mem(5))
+        console.log(fact_mem(10))
+    </script>
+</head>
+<body>
+
+</body>
+</html>
