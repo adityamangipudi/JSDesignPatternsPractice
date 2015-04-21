@@ -5,6 +5,46 @@
     <title>Async</title>
 
     <script>
+        var obj ={}
+
+        function randomPrint(i) { // can change this signature if required
+            var randomInterval = Math.floor(Math.random() * 1000);
+            setTimeout(function () {
+               // console.log(i, randomInterval);
+            }, randomInterval);
+        }
+        var fns = [];
+        for (var i = 0; i < 10; i++) {
+            fns.push(randomPrint.bind(null, i));
+        }
+        fns[0]();
+        fns[1]();
+        fns[2]();
+        function printAfterExecute(fns) { // change this sig if required
+            // print the sum total after all of them have executed
+            count=0;
+            fns.forEach(function(x){
+                var hash = ''
+                //console.log(x)
+                hash = x+''+count++
+                console.log(hash)
+                obj[hash]={}
+                 obj[hash].fn = x
+                 obj[hash].result = x()
+
+            })
+
+        }
+
+        printAfterExecute(fns)
+        console.log(obj.length)
+        var finished =false;
+        for(var hash in obj){
+            if(!(obj[hash].result)){
+
+            }
+        }
+        setInterval(fn)
 
 
     </script>
