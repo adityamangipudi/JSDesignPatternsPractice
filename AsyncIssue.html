@@ -10,24 +10,27 @@
         function randomPrint(i) { // can change this signature if required
             var randomInterval = Math.floor(Math.random() * 1000);
             setTimeout(function () {
-               // console.log(i, randomInterval);
+               //console.log(i, randomInterval);
+
+            return randomInterval
             }, randomInterval);
+
         }
         var fns = [];
         for (var i = 0; i < 10; i++) {
             fns.push(randomPrint.bind(null, i));
         }
-        fns[0]();
-        fns[1]();
-        fns[2]();
+        //fns[0]();
+        //fns[1]();
+       // fns[2]();
         function printAfterExecute(fns) { // change this sig if required
             // print the sum total after all of them have executed
             count=0;
             fns.forEach(function(x){
                 var hash = ''
                 //console.log(x)
-                hash = x+''+count++
-                console.log(hash)
+                hash = JSON.stringify(x)+''+count++
+                //console.log(hash)
                 obj[hash]={}
                  obj[hash].fn = x
                  obj[hash].result = x()
@@ -37,14 +40,31 @@
         }
 
         printAfterExecute(fns)
-        console.log(obj.length)
-        var finished =false;
+        //console.log(obj.length)
+        /*var finished =false;
         for(var hash in obj){
             if(!(obj[hash].result)){
 
             }
+        }*/
+        setTimeout(fn, 1500);
+
+        function fn(){
+            var count =0;
+            var props =0;
+            for(var prop in obj){
+                props++
+                ((typeof obj[prop].result )=== 'undefined' ) ? '' : count++ ;
+            }
+            var sum=0;
+            if(props ===count){
+                for(var prop in obj){
+                    sum+=obj[prop].result
+                }
+                console.log('Resulting sum is ',sum)
+            }
         }
-        setInterval(fn)
+
 
 
     </script>
